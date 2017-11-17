@@ -1,6 +1,8 @@
 /* 
-    Shape Shooter Arcade Game designed by Nathan Bullock and Larisa Kreismanis.
-    Desription: Main class that runs game.
+ * File Name: ShapeShooterArcadeMain.java
+ * Authors: Larisa Kreismanis, Nathan Bullock
+ * Description: Main class that runs the game.
+ * Date Created: 11/17/17
 */
 
 
@@ -10,4 +12,7 @@ import java.awt.*;
 
 public class ShapeShooterArcadeMain{
     
-}
+    System.out.println("test");
+    
+    
+} //end class
