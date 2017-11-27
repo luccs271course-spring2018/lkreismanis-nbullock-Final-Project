@@ -14,7 +14,15 @@ import javax.swing.EmptyBoarder;
 public class Arcade extends JFrame{
     public Arcade(){
         super("Shape Shooter Arcade"){
-            
+            JPanel panel = new JPanel();
+            panel.setLayout(new BoarderLayout());
+            panel.setBorder(new EmptyBoarder(0, 5, 0, 5))
         }
+    }
+    public static void main(String[] args){
+        Arcade window = new Arcade();
+        window.setBounds(100, 100, 600, 600);
+        window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        window.setVisable(True);
     }
 }
