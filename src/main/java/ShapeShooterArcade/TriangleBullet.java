@@ -1,11 +1,11 @@
 package ShapeShooterArcade;
 /* 
- * File Name: triangleBullet.java
+ * File Name: TriangleBullet.java
  * Authors: Larisa Kreismanis, Nathan Bullock
  * Description: creates triangle bullet 
  * Date Created: 11/17/29
 */
 
-public class triangleBullet extends Bullet{
+public class TriangleBullet extends Bullet{
     return null;
 }
