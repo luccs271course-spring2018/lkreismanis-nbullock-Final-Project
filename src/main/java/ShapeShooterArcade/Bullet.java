@@ -1,11 +1,12 @@
+package ShapeShooterArcade;
 /* 
- * File Name: ShapeShooterArcadeMain.java
+ * File Name: Bullet.java
  * Authors: Larisa Kreismanis, Nathan Bullock
  * Description: Class that will incorparate triangleBullet and rectangleBullet subclasses
  * Date Created: 11/17/17
 */
 
-public class Bullet {
+public abstract class Bullet {
     private int centerX, centerY, radius, id;
     private boolean used;
     private int speedX, speedY;
@@ -31,37 +32,34 @@ public class Bullet {
     public void move(){
         centerY = centerY + speedY;
     }
-    public getX(){
+    public int getX(){
         return centerX;
     }
-    public getY(){
+    public int getY(){
         return centerY;
     }
-    public getSpeedX(){
+    public int getSpeedX(){
         return speedX;
     }
-    public getSpeedY(){
+    public int getSpeedY(){
         return speedY;
     }
-    public getRadius(){
+    public int getRadius(){
         return radius; 
     }
-    public getColor(){
-        return color; 
-    }
-    public setX(int x){
+    public void setX(int x){
         centerX = x;
     }
-    public setY(int y){
+    public void setY(int y){
         centerY = y;
     }
-    public setSpeedX(int x){
+    public void setSpeedX(int x){
         speedX = x;
     }
-    public setSpeedY(int y){
+    public void setSpeedY(int y){
         speedY = y;
     }
-    public setColor(int c){
+    public void setColor(int c){
         color = c;
     }
     

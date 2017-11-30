@@ -1,3 +1,4 @@
+package ShapeShooterArcade;
 /* 
  * File Name: Outline.java
  * Authors: Larisa Kreismanis, Nathan Bullock
@@ -6,5 +7,5 @@
 */
 
 public class Outline {
-    
+    return null;
 } //end class

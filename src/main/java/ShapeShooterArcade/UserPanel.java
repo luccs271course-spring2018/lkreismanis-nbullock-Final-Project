@@ -1,3 +1,4 @@
+package ShapeShooterArcade;
 /* 
  * File Name: UserPanel.java
  * Authors: Larisa Kreismanis, Nathan Bullock
@@ -14,5 +15,5 @@ import java.io.*;
 
 public class UserPanel extends JPanel implements KeyListener, ActionListener, MouseListener, ArcadeFriendly  {
     
-    
+    return null;
 } //end class

@@ -1,3 +1,4 @@
+package ShapeShooterArcade;
 /* 
  * File Name: Arcade.java
  * Authors: Larisa Kreismanis, Nathan Bullock

@@ -1,3 +1,4 @@
+package ShapeShooterArcade;
 /* 
  * File Name: ArcadeFriendly.java
  * Authors: Larisa Kreismanis, Nathan Bullock
@@ -6,6 +7,6 @@
 */
 
 public class ArcadeFriendly {
-    
+    return null;
 }
 

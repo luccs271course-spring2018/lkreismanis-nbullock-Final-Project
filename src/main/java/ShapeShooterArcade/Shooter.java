@@ -1,3 +1,4 @@
+package ShapeShooterArcade;
 /* 
  * File Name: Shooter.java
  * Authors: Larisa Kreismanis, Nathan Bullock
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.awt.*;
 
 
-public class Shooter {
+public abstract class Shooter {
     
     private int cornerX, cornerY;
     private int height, width;
