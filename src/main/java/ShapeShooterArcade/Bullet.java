@@ -4,6 +4,7 @@ package ShapeShooterArcade;
  * Authors: Larisa Kreismanis, Nathan Bullock
  * Description: Class that will incorparate triangleBullet and rectangleBullet subclasses
  * Date Created: 11/17/17
+ * COMPLETED
 */
 
 public abstract class Bullet {

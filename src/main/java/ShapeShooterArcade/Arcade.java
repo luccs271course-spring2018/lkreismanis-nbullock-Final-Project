@@ -1,9 +1,10 @@
-package ShapeShooterArcade;
+//package ShapeShooterArcade;
 /* 
  * File Name: Arcade.java
  * Authors: Larisa Kreismanis, Nathan Bullock
  * Description: Panel used to display arcade game to the user
  * Date Created: 11/27/17
+ * COMPLETED
 */
 
 import java.awt.Container;
