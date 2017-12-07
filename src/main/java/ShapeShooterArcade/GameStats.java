@@ -37,7 +37,7 @@
       if(points > 300){
        yourScoreText.setForeground(Color.BLUE);
        String s = (String)JOptionPane.showInputDialog(this, "Youre the new highscorer!", "Hgih Score", JOptionPane.PLAIN_MESSAGE, null, null, "name");
-       System.out.println(you are the new high scorer");
+       System.out.println("you are the new high scorer");
       }
       else{
        System.out.println("You didnt beat the highscore");

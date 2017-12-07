@@ -15,7 +15,8 @@ import javax.swing.EmptyBoarder;
 
 public class Arcade extends JFrame{
     public Arcade(){
-        super("Shape Shooter Arcade"){
+        super("Shape Shooter Arcade");
+        
             ArcadeFriendly game = new UserPanel(600, 450);
             GameStats display = new GameStats(game);
             ControlPanel controls = new ControlPanel(game, display);

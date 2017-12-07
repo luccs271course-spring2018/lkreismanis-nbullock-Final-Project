@@ -20,7 +20,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Mo
     private ArrayList<Integer> highScore = new ArrayList <Integer>();
     
     private javax.swing.Timer timer;
-    privaye Shooter myMovingShooter;
+    private Shooter myMovingShooter;
     private int shapesFilled = 0;
     private int timeCounter = 0;
     int addSec = 0;
