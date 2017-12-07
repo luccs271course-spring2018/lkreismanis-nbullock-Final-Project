@@ -48,6 +48,9 @@ public abstract class Bullet {
     public int getRadius(){
         return radius; 
     }
+    public int getId(){
+        return id;
+    }
     public void setX(int x){
         centerX = x;
     }
