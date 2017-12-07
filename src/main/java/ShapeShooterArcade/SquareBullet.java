@@ -16,6 +16,10 @@
      }
      
      public void draw(Graphics g){
-         
+         int x = getX();
+         int y = getY();
+         if(getId() == 5){
+            g.fillRect(x + 10, y, 40, 40);
+         }
      }
  }  //end class
