@@ -16,9 +16,20 @@ import javax.swing.EmptyBoarder;
 public class Arcade extends JFrame{
     public Arcade(){
         super("Shape Shooter Arcade"){
+            ArcadeFriendly game = new UserPanel(600, 450);
+            GameStats display = new GameStats(game);
+            ControlPanel controls = new ControlPanel(game, display);
+           
             JPanel panel = new JPanel();
+            
             panel.setLayout(new BoarderLayout());
-            panel.setBorder(new EmptyBoarder(0, 5, 0, 5))
+            panel.setBorder(new EmptyBoarder(0, 5, 0, 5));
+            panel.add(display, BoarderLayout.NORTH);
+            panel.add((JPanel)game, BoarderLayout.CENTER);
+            panel.add(controls, BoarderLayout.SOUTH);
+            
+            Container c = getContentPane();
+            c.add(panel, BoarderLayout.CENTER);
         }
     }
     public static void main(String[] args){
