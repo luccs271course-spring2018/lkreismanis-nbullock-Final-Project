@@ -4,6 +4,7 @@ package ShapeShooterArcade;
  * Authors: Larisa Kreismanis, Nathan Bullock
  * Description: Outline file.
  * Date Created: 11/17/17
+ * COMPLETED
 */
 
 import java.awt.*;
