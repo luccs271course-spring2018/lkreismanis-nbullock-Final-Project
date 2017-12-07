@@ -15,9 +15,18 @@ import java.util.Scanner;
 import java.io.*;
 
 public class UserPanel extends JPanel implements KeyListener, ActionListener, MouseListener, ArcadeFriendly  {
-    private ArrayList<Shooter> shooters = new ArrayList<Shooter>();
-    private ArrayList<Outline> outline = new ArrayList<Outline>();
+    private ArrayList<Shooter> shooters = new ArrayList<Shooter>(5);
+    private ArrayList<Outline> outline = new ArrayList<Outline>(13);
     private ArrayList<Integer> highScore = new ArrayList <Integer>();
+    
+    private javax.swing.Timer timer;
+    privaye Shooter myMovingShooter;
+    private int shapesFilled = 0;
+    private int timeCounter = 0;
+    int addSec = 0;
+    int currentHighScore;
+    int currentScore;
+    
     
     public UserPanel(int width, int height){
         Color backColor = Color.WHITE;
