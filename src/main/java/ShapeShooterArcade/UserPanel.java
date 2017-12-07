@@ -4,6 +4,7 @@ package ShapeShooterArcade;
  * Authors: Larisa Kreismanis, Nathan Bullock
  * Description: User panel of Shape Shooter Arcade game.
  * Date Created: 11/17/17
+ * INCOMPLETE
 */
 
 import javax.swing.*;
