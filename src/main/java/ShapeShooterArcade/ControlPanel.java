@@ -20,7 +20,7 @@
  public class ControlPanel extends JPanel implements ActionListener{
      private ArcadeFreindly game;
      private GameStats gStats;
-     private JButton, pauseButton, stopButton, instructionsButton, creditsButton;
+     private JButton startButton, pauseButton, stopButton, instructionsButton, creditsButton;
      
      public ControlPanel(ArcadeFriendly t, GameStats g){
          game = t;

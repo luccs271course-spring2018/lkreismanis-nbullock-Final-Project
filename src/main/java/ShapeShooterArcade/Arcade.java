@@ -32,7 +32,7 @@ public class Arcade extends JFrame{
             Container c = getContentPane();
             c.add(panel, BoarderLayout.CENTER);
         }
-    }
+    
     public static void main(String[] args){
         Arcade window = new Arcade();
         window.setBounds(100, 100, 600, 600);
