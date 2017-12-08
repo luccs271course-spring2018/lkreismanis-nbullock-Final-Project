@@ -35,43 +35,43 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Mo
         addMouseListener(this);
 //------------------------------------------------------------------------------        
         //BACKGROUND OUTLINE of pattern
-        outline.add(new TriangleOutline()); //UP Triangle Outline
-        outline.add(new TriangleOutline()); //UP Triangle Outline 
-        outline.add(new TriangleOutline()); //UP Triangle Outline 
+        outline.add(new TriangleOutline(171, 175, 1)); //UP Triangle Outline
+        outline.add(new TriangleOutline(250, 195, 1)); //UP Triangle Outline 
+        outline.add(new TriangleOutline(329, 175, 1)); //UP Triangle Outline 
         
-        outline.add(new TriangleOutline()); //DOWN Triangle Outline 
-        outline.add(new TriangleOutline()); //DOWN Triangle Outline 
-        outline.add(new TriangleOutline()); //DOWN Triangle Outline
+        outline.add(new TriangleOutline(171, 135, 2)); //DOWN Triangle Outline 
+        outline.add(new TriangleOutline(250, 115, 2)); //DOWN Triangle Outline 
+        outline.add(new TriangleOutline(329, 135, 2)); //DOWN Triangle Outline
         
-        outline.add(new TriangleOutline()); //RIGHT Triangle Outline 
-        outline.add(new TriangleOutline()); //RIGHT Triangle Outline 
-        outline.add(new TriangleOutline()); //RIGHT Triangle Outline 
+        outline.add(new TriangleOutline(290, 115, 3)); //RIGHT Triangle Outline 
+        outline.add(new TriangleOutline(290, 195, 3)); //RIGHT Triangle Outline 
+        outline.add(new TriangleOutline(150, 155, 3)); //RIGHT Triangle Outline 
         
-        outline.add(new TriangleOutline()); //LEFT Triangle Outline 
-        outline.add(new TriangleOutline()); //LEFT Triangle Outline 
-        outline.add(new TriangleOutline()); //LEFT Triangle Outline 
+        outline.add(new TriangleOutline(210, 115, 4)); //LEFT Triangle Outline 
+        outline.add(new TriangleOutline(210, 195, 4)); //LEFT Triangle Outline 
+        outline.add(new TriangleOutline(350, 155, 4)); //LEFT Triangle Outline 
         
-        outline.add(new SquareOutline()); //Square Outline
+        outline.add(new SquareOutline(260, 175, 5)); //Square Outline
 //------------------------------------------------------------------------------        
         //SHOOTERS
         int triangleShooterHeight, triangleShooterWidth;
         int squareShooterHeight, squareShooterWidth;
         
-        triangleShooterHeight = height;
-        triangleShooterWidth = width;
-        squareShooterHeight = height;
-        squareShooterWidth = width;
+        triangleShooterHeight = height / 10;
+        triangleShooterWidth = width / 10;
+        squareShooterHeight = height / 10;
+        squareShooterWidth = width / 10;
         
         //UP Triangle Shooter
-        shooters.add(new TriangleShooter());
+        shooters.add(new TriangleShooter(50, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.RED), 1));
         //DOWN Triangle Shooter
-        shooters.add(new TriangleShooter());
+        shooters.add(new TriangleShooter(150, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.BLUE), 2));
         //RIGHT Triangle Shooter
-        shooters.add(new TriangleShooter());
+        shooters.add(new TriangleShooter(250, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.GREEN), 3));
         //LEFT Triangle Shooter
-        shooters.add(new TriangleShooter());
+        shooters.add(new TriangleShooter(350, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.ORANGE), 4));
         //Square Shooter
-        shooters.add(new SquareShooter());
+        shooters.add(new SquareShooter(450, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.MAGENTA), 5));
 //------------------------------------------------------------------------------        
         //TIMER status is checked every 50 milliseconds
         timer = new javax.swing.Timer(50, this);
@@ -189,6 +189,105 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Mo
             default:
         }
     }
+//------------------------------------------------------------------------------
+public void paintComponent(Graphics g){
+    super.paintComponent(g);
+    
+    for(int i = 0; i < shooters.size(); i++){
+        shooters.get(i).draw(g);
+    }
+    int fontSize = 15;
+    g.setColor(Color.black);
+    g.setFont(new Font("ComicSans", Font.PLAIN, fontSize));
+    if(!start){
+        g.drawString("Shape Shooter Arcade Game", 160, 75);
+        
+    }
+    else if(start){
+        int num = 0;
+        g.setColor(Color.black);
+        for(int i = 0; i < outline.size(); i++){
+            outline.get(i).draw(g);
+        }
+        g.drawString("Shapes filled: " + shapesFilled, 160, 45);
+        g.drawString("Timer: " + addSec, 300, 45);
+        
+        if(timeCounter >= 20 && timeCounter <= 40){
+            if(timeCounter % 20 == 0){
+                addSec++;
+            }
+            if(timeCounter == 40){
+                timeCounter = 0;
+            }
+        }
+        
+        if(shapesFilled == 1){
+            g.drawString("You Win!", 250, 75);
+            start = false;
+            timer.stop();
+            /*
+            try{
+                
+            }
+            catch(Exception e){
+                
+            }
+            */
+        }
+    }
+}
+
+private class PanelMotionListener extends MouseMotionAdapter {
+    public void mouseDragged(MouseEvent e){
+        if(myMovingShooter != null){
+            int xVal = myMovingShooter.getX();
+            int yVal = myMovingShooter.getY();
+            int width = myMovingShooter.getWidth();
+            int height = myMovingShooter.getHeight();
+        }
+    }
+}
+
+private void checkStats(){
+    if(myMovingShooter != null){
+        timeCounter++;
+        ArrayList<Bullet> shotBullets = myMovingShooter.getShotBullets();
+        if(shotBullets != null){
+            for(int i = 0; i < shotBullets.size(); i++){
+                boolean move = true;
+                int bulletX = shotBullets.get(i).getX() + shotBullets.get(i).getRadius();
+                int bulletY = shotBullets.get(i).getY();
+                int radius = shotBullets.get(i).getRadius();
+                for(int j = 0; j < outline.size(); j++){
+                    int approxMinX = outline.get(j).getX()-10;
+                    int approxMaxX = outline.get(j).getX()+10;
+                    int approxMinY = outline.get(j).getX()-10;
+                    int approxMaxY = outline.get(j).getX()+10;
+                    if(bulletX < approxMaxX && bulletX > approxMinX){
+                        if(bulletY < approxMaxY && bulletY > approxMinY){
+                            System.out.println(shotBullets.get(i).getId());
+                            System.out.println(outline.get(j).getId());
+                            if(shotBullets.get(i).getId() == outline.get(j).getId()){
+                                if(outline.get(j).getFill() == false){
+                                    bulletX = outline.get(j).getX();
+                                    bulletY = outline.get(j).getY();
+                                    move = false;
+                                    shotBullets.remove(i);
+                                    outline.get(j).setFill(true);
+                                    shapesFilled++;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if(move == true){
+        shotBullets.get(i).move();
+    }
+}
     
     
     //return null;
