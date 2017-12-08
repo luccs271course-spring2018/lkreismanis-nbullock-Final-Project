@@ -143,7 +143,52 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Mo
         }
     }
 //------------------------------------------------------------------------------
+    //MOUSE INTERACTION
     
+    //Invoked when timer expires every 50ms
+    public void actionPerformed(ActionEvent e){
+        checkStats();
+        repaint();  //makes sure PaintComponent is called
+    }
+    
+    public void mouseClicked(MouseEvent e){
+        //loops through shooter array list
+        for(int i = 0; i < shooters.size(); i++){
+            int xVal = shooters.get(i).getX();
+            int yVal = shooters.get(i).getY();
+            int width = shooters.get(i).getWidth();
+            int height = shooters.get(i).getHeight();
+            System.out.println(xVal + " " + yVal + " " + width + " " + height);
+            if(e.getX() >= xVal && e.getX() <= (xVal + width) && e.getY() >= yVal && e.getY() <= yVal + height){
+                myMovingShooter = shooters.get(i);
+                break;
+            }
+        }
+    }
+    
+    public void mouseExited(MouseEvent e){}
+    public void mouseEntered(MouseEvent e){}
+    public void mouseReleased(MouseEvent e){}
+    public void mousePressed(MouseEvent e){}
+    
+    public void keyTyped(KeyEvent e){}
+    public void keyReleased(KeyEvent e){}
+    public void keyPressed(KeyEvent e){
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_ENTER:  //action pereformed when enter key is pressed
+                timer.start();
+                start = true;
+                break;
+            case KeyEvent.VK_SPACE:  //action pereformed when space key is pressed
+                //shoot action
+                myMovingShooter.shoot();
+                break;
+            case KeyEvent.VK_ESCAPE:  //action pereformed when escape key is pressed
+                System.exit(0);
+                break;
+            default:
+        }
+    }
     
     
     //return null;
