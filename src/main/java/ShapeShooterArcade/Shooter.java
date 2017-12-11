@@ -1,24 +1,24 @@
-package ShapeShooterArcade;
-/* 
- * File Name: Shooter.java
- * Authors: Larisa Kreismanis, Nathan Bullock
- * Description: Shooter file.
- * Date Created: 11/17/17
+/*
+ * SHAPE SHOOTER ARCADE GAME
+ * by Larisa Kreismanis & Nathan Bullock
+ * File: Shooter.java
+ * Description: Abstract Shooter class for the triangleShooter and squareShooter subclasses.
  * COMPLETED
-*/
-import java.util.ArrayList;
-import java.awt.*;
+ */
 
+import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Shooter {
-    
+
     private int cornerX, cornerY;
     private int height, width;
     private Color color;
     private ArrayList<Bullet> storedBullets;
-    private ArrayList<Bullet> shotBullets; 
-    
-    public Shooter(int x, int y, int h, int w, Color c){
+    private ArrayList<Bullet> shotBullets;
+
+    public Shooter(int x, int y, int h, int w, Color c)
+    {
         cornerX = x;
         cornerY = y;
         height = h;
@@ -27,113 +27,114 @@ public abstract class Shooter {
         ArrayList<Bullet> storedBullets;
         ArrayList<Bullet> shotBullets;
     }
-    
+
     //loadBullets determines what kind of bullets to load with the shooter
-    public void loadBullets(int xSpeed, int ySpeed, int size, int cnt, int id){
+    public void loadBullets(int xSpeed, int ySpeed, int size, int cnt, int id)
+    {
         storedBullets = new ArrayList<Bullet>(cnt);
         shotBullets = new ArrayList<Bullet>();
-        /*ID KEY
-        1 = UP pointing Triangle
-        2 = DOWN pointing Triangle
-        3 = LEFT pointing Triangle
-        4 = RIGHT pointing Triangle
-        5 = Square
-        */
-        
-        //UP Triangle
-        if(id == 1){
-            for(int i = 0; i < cnt; i++){
+        if(id == 1) //1 means UP pointing Triangle
+        {
+            for(int i =0; i < cnt; i++) {
                 storedBullets.add(new TriangleBullet(getX(), getY(), size, 1, xSpeed, ySpeed, Color.RED));
             }
         }
-        //DOWN Triangle
-        else if(id == 2){
-            for(int i = 0; i < cnt; i++){
+        else if(id == 2) //2 means DOWN pointing Triangle
+        {
+            for(int i = 0; i < cnt; i++) {
                 storedBullets.add(new TriangleBullet(getX(), getY(), size, 2, xSpeed, ySpeed, Color.BLUE));
             }
         }
-        //LEFT Triangle
-        else if(id == 3){
-            for(int i = 0; i < cnt; i++){
+        else if(id == 3) //3 means LEFT pointing Triangle
+        {
+            for(int i = 0; i < cnt; i++) {
                 storedBullets.add(new TriangleBullet(getX(), getY(), size, 3, xSpeed, ySpeed, Color.GREEN));
             }
         }
-        //RIGHT Triangle
-        else if(id == 4){
-            for(int i = 0; i < cnt; i++){
+        else if(id == 4) //4 means RIGHT pointing Triangle
+        {
+            for(int i = 0; i < cnt; i++) {
                 storedBullets.add(new TriangleBullet(getX(), getY(), size, 4, xSpeed, ySpeed, Color.ORANGE));
             }
         }
-        //Square
-        else if(id == 5){
-            for(int i = 0; i < cnt; i++){
+        else if(id == 5) //5 means Square
+        {
+            for(int i = 0; i < cnt; i++) {
                 storedBullets.add(new SquareBullet(getX(), getY(), size, 5, xSpeed, ySpeed, Color.MAGENTA));
             }
         }
     }
-    
-    public void setStoredBullets(ArrayList<Bullet> stored){
+
+    public void setStoredBullets(ArrayList<Bullet> stored) {
         storedBullets = stored;
     }
-    public void setShotBullets(ArrayList<Bullet> shot){
+
+    public void setShotBullets(ArrayList<Bullet> shot) {
         shotBullets = shot;
     }
-    public ArrayList<Bullet> getStoredBullets(){
+
+
+    public ArrayList<Bullet> getStoredBullets() {
         return storedBullets;
     }
-    public Color getColor(){
+
+    public Color getColor() {
         return color;
     }
-    public int getX(){
+    public int getX() {
         return cornerX;
     }
-    public int getY(){
+
+    public int getY() {
         return cornerY;
     }
+
     public void setX(int x){
         cornerX = x;
     }
-    public int getHeight(){
+
+    public int getHeight() {
         return height;
     }
-    public void setHeight(int h){
+    public void setHeight(int h) {
         height = h;
     }
-    public int getWidth(){
+
+    public int getWidth() {
         return width;
     }
-    public void setWidth(int w){
+    public void setWidth(int w) {
         width = w;
     }
-    
+
     //moves X value
-    public void move(int x, int w){
+    public void move(int x, int w) {//moves side to side
         setX(x - w);
     }
-    
-    public void shoot(){
-        System.out.println("shoot test");
-        if(getStoredBullets().size() > 0){
+
+    public void shoot() {
+        System.out.println("shoot");
+
+        if(getStoredBullets().size() > 0) {
             getStoredBullets().get(getStoredBullets().size()-1).setX(getX()+getWidth()/2);
             getStoredBullets().get(getStoredBullets().size()-1).setY(getY());
             getStoredBullets().get(getStoredBullets().size()-1).release();
-            
-            Bullet b = getStoredBullets().remove(getStoredBullets().size-1);
+            Bullet b = getStoredBullets().remove(getStoredBullets().size()-1);
+            // getShotBullets().add(getStoredBullets().remove(getStoredBullets().size()-1));
             getShotBullets().add(b);
         }
     }
-    
-    public ArrayList<Bullet> getShotBullets(){
-        if(shotBullets != null){
-            for(int i = 0; i < shotBullets.size(); i++){
-                if(shotBullets.get(i).getY() >= 1000){
+
+    public ArrayList<Bullet> getShotBullets() {
+        if(shotBullets != null) {
+            for(int i  = 0; i < shotBullets.size(); i++) {
+                if(shotBullets.get(i).getY() >= 1000) {
                     shotBullets.remove(i);
                 }
             }
         }
         return shotBullets;
     }
-    
+
     public abstract void draw(Graphics g);
-} 
-//end class
+}  //end class

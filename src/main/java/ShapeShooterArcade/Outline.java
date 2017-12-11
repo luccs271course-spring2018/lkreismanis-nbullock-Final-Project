@@ -1,41 +1,44 @@
-package ShapeShooterArcade;
-/* 
- * File Name: Outline.java
- * Authors: Larisa Kreismanis, Nathan Bullock
- * Description: Outline file.
- * Date Created: 11/17/17
+/*
+ * SHAPE SHOOTER ARCADE GAME
+ * by Larisa Kreismanis & Nathan Bullock
+ * File: Outline.java
+ * Description: The Outline is an abstract class for the game's outline.
  * COMPLETED
-*/
+ */
 
 import java.awt.*;
 
-public class Outline {
+public abstract class Outline {
+
     private int locationX, locationY, id;
     private boolean fill;
-    
-    public Outline(int x, int y, int i){
+
+    public Outline(int x, int y, int i) {
         locationX = x;
         locationY = y;
         id = i;
-        fill = false;
+        fill=false;
     }
-    public boolean getFill(){
+    public boolean getFill()
+    {
         return fill;
     }
-    public boolean setFill(boolean t){
-        fill = t;
+    public void setFill(boolean t)
+    {
+        fill=t;
     }
-    public int getX(){
+
+    public int getX() {
         return locationX;
     }
-    public int getY(){
+
+    public int getY() {
         return locationY;
     }
-    public int getId(){
+
+    public int getId() {
         return id;
     }
-    
+
     public abstract void draw(Graphics g);
-    
-    //return null;
 } //end class

@@ -1,11 +1,10 @@
-package ShapeShooterArcade;
-/* 
- * File Name: UserPanel.java
- * Authors: Larisa Kreismanis, Nathan Bullock
- * Description: User panel of Shape Shooter Arcade game.
- * Date Created: 11/17/17
- * INCOMPLETE
-*/
+/*
+ * SHAPE SHOOTER ARCADE GAME
+ * by Larisa Kreismanis & Nathan Bullock
+ * File: UserPanel.java
+ * Description: The user panel for the entire arcade game.
+ * COMPLETED
+ */
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,281 +13,266 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
-public class UserPanel extends JPanel implements KeyListener, ActionListener, MouseListener, ArcadeFriendly  {
+public class UserPanel extends JPanel implements KeyListener, ActionListener, MouseListener, ArcadeFriendly {
+
     private ArrayList<Shooter> shooters = new ArrayList<Shooter>(5);
     private ArrayList<Outline> outline = new ArrayList<Outline>(13);
-    private ArrayList<Integer> highScore = new ArrayList <Integer>();
-    
+
     private javax.swing.Timer timer;
     private Shooter myMovingShooter;
     private int shapesFilled = 0;
     private int timeCounter = 0;
     int addSec = 0;
-    int currentHighScore;
     int currentScore;
-    
-    private boolean starts = false;
-    
-    public UserPanel(int width, int height){
-        Color backColor = Color.WHITE;
-        
+
+    private boolean start = false;
+
+    public UserPanel (int width, int height) {
+
+        Color backColor=Color.WHITE;
+
         addMouseListener(this);
-//------------------------------------------------------------------------------        
-        //BACKGROUND OUTLINE of pattern
-        outline.add(new TriangleOutline(171, 175, 1)); //UP Triangle Outline
-        outline.add(new TriangleOutline(250, 195, 1)); //UP Triangle Outline 
-        outline.add(new TriangleOutline(329, 175, 1)); //UP Triangle Outline 
-        
-        outline.add(new TriangleOutline(171, 135, 2)); //DOWN Triangle Outline 
-        outline.add(new TriangleOutline(250, 115, 2)); //DOWN Triangle Outline 
-        outline.add(new TriangleOutline(329, 135, 2)); //DOWN Triangle Outline
-        
-        outline.add(new TriangleOutline(290, 115, 3)); //RIGHT Triangle Outline 
-        outline.add(new TriangleOutline(290, 195, 3)); //RIGHT Triangle Outline 
-        outline.add(new TriangleOutline(150, 155, 3)); //RIGHT Triangle Outline 
-        
-        outline.add(new TriangleOutline(210, 115, 4)); //LEFT Triangle Outline 
-        outline.add(new TriangleOutline(210, 195, 4)); //LEFT Triangle Outline 
-        outline.add(new TriangleOutline(350, 155, 4)); //LEFT Triangle Outline 
-        
-        outline.add(new SquareOutline(260, 175, 5)); //Square Outline
-//------------------------------------------------------------------------------        
-        //SHOOTERS
+
+        //Draws outline of pattern
+        outline.add(new TriangleOutline(171, 175, 1));  //UP Triangle Outline
+        outline.add(new TriangleOutline(250, 195, 1));  //UP Triangle Outline
+        outline.add(new TriangleOutline(329, 175, 1));  //UP Triangle Outline
+        outline.add(new TriangleOutline(171, 135, 2));  //DOWN Triangle Outline
+        outline.add(new TriangleOutline(250, 115, 2));  //DOWN Triangle Outline
+        outline.add(new TriangleOutline(329, 135, 2));  //DOWN Triangle Outline
+        outline.add(new TriangleOutline(290, 115, 3));  //RIGHT Triangle
+        outline.add(new TriangleOutline(290, 195, 3));  //RIGHT Triangle
+        outline.add(new TriangleOutline(150, 155, 3));  //RIGHT Triangle
+        outline.add(new TriangleOutline(210, 115, 4));  //LEFT Triangle
+        outline.add(new TriangleOutline(210, 195, 4));  //LEFT Triangle
+        outline.add(new TriangleOutline(350, 155, 4));  //LEFT Triangle
+        outline.add(new SquareOutline(260, 175, 5));  //Square
+
+
         int triangleShooterHeight, triangleShooterWidth;
         int squareShooterHeight, squareShooterWidth;
-        
+
+        //Draws shooters
         triangleShooterHeight = height / 10;
         triangleShooterWidth = width / 10;
         squareShooterHeight = height / 10;
         squareShooterWidth = width / 10;
-        
-        //UP Triangle Shooter
-        shooters.add(new TriangleShooter(50, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.RED), 1));
-        //DOWN Triangle Shooter
-        shooters.add(new TriangleShooter(150, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.BLUE), 2));
-        //RIGHT Triangle Shooter
-        shooters.add(new TriangleShooter(250, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.GREEN), 3));
-        //LEFT Triangle Shooter
-        shooters.add(new TriangleShooter(350, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.ORANGE), 4));
-        //Square Shooter
-        shooters.add(new SquareShooter(450, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.MAGENTA), 5));
-//------------------------------------------------------------------------------        
-        //TIMER status is checked every 50 milliseconds
+        shooters.add(new TriangleShooter(50, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.RED), 1));  //UP Triangle
+        shooters.add(new TriangleShooter(150, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.BLUE), 2));  //DOWN Triangle
+        shooters.add(new TriangleShooter(250, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.GREEN), 3));  //RIGHT Triangle
+        shooters.add(new TriangleShooter(350, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.ORANGE), 4));  //LEFT Triangle       
+        shooters.add(new SquareShooter(450, height*4/5, squareShooterHeight, squareShooterWidth, (Color.MAGENTA), 5));  //Square
+
+        //Status check every 50 milliseconds
         timer = new javax.swing.Timer(50, this);
-        
-        addKeyListener(this); //used for key controls
-        addMouseMotionListener(new PanelMotionListener());  //used to listen to mouse events
-        
+
+        addKeyListener(this);//used for key controls
+        addMouseMotionListener(new PanelMotionListener()); //used to listen to mouse events
+
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         setBackground(backColor);
         setPreferredSize(new Dimension(width, height));
-    } //end UserPanel constructor
-    
-//------------------------------------------------------------------------------    
-    //INTERFACE METHODS
-    public boolean running(){
-        if(start){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
-    public void startGame(){
+
+    //INTERFACE METHODS
+    public boolean running() {
+        if(start)
+            return true;
+        else
+            return false;
+    }
+    public void startGame() {
         start = true;
         timer.start();
     }
-    public void pauseGame(){
-        start = false;
-        timer.stop();
-    }
-    public void stopGame(){
-        start = false;
-        timer.stop();
-        shapesFilled = 0;
-    }
-    public void endGame(){
-        shapesFilled = 13;
-    }
-    public int getPoints(){
-        return addSec;
-    }
-    public String getGameName(){
+    public String getGameName() {
         return "SHAPE SHOOTER ARCADE GAME";
     }
-    public String getInstructions(){
-        return "Objective: " +
-            '\n'+"Fill in the outlined shapes!"+
-            '\n'+"Instructions: "+
-            '\n'+"1.) Click a color shooter once."+
-            '\n'+"2.) Hold and drag the shooter to aim."+
-            '\n'+"3.) Press the spacebar to shoot."+
-            '\n'+"4.) Match the shape bullet to the outline.";
+    public void pauseGame() {
+        timer.stop();
+        start = false;
     }
-    public String getCredits(){
-        return "Developed by Larisa Kreismanis and Nathan Bullock";
+    public String getInstructions() {
+        return "Objective:" +
+                '\n'+"Fill in the outlined shapes!" +
+                '\n'+"Instructions:" +
+                '\n'+"1.) Click a colored shooter once." +
+                '\n'+"2.) Hold and drag the shooter to aim." +
+                '\n'+"3.) Press the spacebar to shoot." +
+                '\n'+"4.) Match the shape bullet to the outline.";
     }
-    public String getHighScore(){
-        try{
-            Scanner readerFile = new Scanner(new File("FILENAME.txt"));
-            String oldHSString = readerFile.nextLine();
-            int oldHighScore = Integer.parseInt(oldHSString);
-            String hs = oldHighScore + " ";
-            return hs;
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
+    public String getCredits() {
+        return "Developed by Larisa Kreismanis & Nathan Bullock";
     }
-//------------------------------------------------------------------------------
-    //MOUSE INTERACTION
-    
-    //Invoked when timer expires every 50ms
-    public void actionPerformed(ActionEvent e){
+
+    public void endGame() {
+        shapesFilled = 13;
+    }
+    public void stopGame() {
+        timer.stop();
+        shapesFilled = 0;
+        start = false;
+    }
+    public int getPoints() {
+        return addSec;
+    }
+
+    public void actionPerformed (ActionEvent e) {//invoked when timer expires every 50ms
         checkStats();
-        repaint();  //makes sure PaintComponent is called
+        repaint(); //ensures PaintComponent is called
     }
-    
-    public void mouseClicked(MouseEvent e){
+
+    public void mouseClicked(MouseEvent e) {
         //loops through shooter array list
-        for(int i = 0; i < shooters.size(); i++){
+        for(int i = 0; i < shooters.size(); i++) {
             int xVal = shooters.get(i).getX();
-            int yVal = shooters.get(i).getY();
             int width = shooters.get(i).getWidth();
             int height = shooters.get(i).getHeight();
-            System.out.println(xVal + " " + yVal + " " + width + " " + height);
-            if(e.getX() >= xVal && e.getX() <= (xVal + width) && e.getY() >= yVal && e.getY() <= yVal + height){
+            int yVal =  shooters.get(i).getY();
+            System.out.print(xVal + " " + yVal + " " + width + " "+ height);
+            System.out.println();
+            if(e.getX()>=xVal && e.getX()<=(xVal + width)&& e.getY()>=yVal && e.getY()<=yVal+height ) {
                 myMovingShooter = shooters.get(i);
                 break;
             }
         }
     }
-    
-    public void mouseExited(MouseEvent e){}
-    public void mouseEntered(MouseEvent e){}
-    public void mouseReleased(MouseEvent e){}
-    public void mousePressed(MouseEvent e){}
-    
-    public void keyTyped(KeyEvent e){}
-    public void keyReleased(KeyEvent e){}
+
+    public void mouseExited(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
+    public void keyTyped(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {}
     public void keyPressed(KeyEvent e){
-        switch(e.getKeyCode()){
-            case KeyEvent.VK_ENTER:  //action pereformed when enter key is pressed
+        switch(e.getKeyCode())
+        {
+            case KeyEvent.VK_ENTER://actions performed if enter key is pressed
                 timer.start();
                 start = true;
                 break;
-            case KeyEvent.VK_SPACE:  //action pereformed when space key is pressed
-                //shoot action
+            case KeyEvent.VK_SPACE://actions performed if space key is pressed
+                //SHOOT ACTION
                 myMovingShooter.shoot();
                 break;
-            case KeyEvent.VK_ESCAPE:  //action pereformed when escape key is pressed
+            case KeyEvent.VK_ESCAPE://actions performed if escape key is pressed
                 System.exit(0);
                 break;
             default:
         }
     }
-//------------------------------------------------------------------------------
-public void paintComponent(Graphics g){
-    super.paintComponent(g);
-    
-    for(int i = 0; i < shooters.size(); i++){
-        shooters.get(i).draw(g);
-    }
-    int fontSize = 15;
-    g.setColor(Color.black);
-    g.setFont(new Font("ComicSans", Font.PLAIN, fontSize));
-    if(!start){
-        g.drawString("Shape Shooter Arcade Game", 160, 75);
-        
-    }
-    else if(start){
-        int num = 0;
+
+    //PAINT ELEMENTS
+    public void paintComponent(Graphics g){
+
+        super.paintComponent(g);
+        //DrawnOutline outline = new DrawnOutline(10, 10);
+
+        //Draws shoters
+        for(int i = 0; i < shooters.size(); i++) {
+            shooters.get(i).draw(g);
+        }
+
+        int fontSize = 15;
         g.setColor(Color.black);
-        for(int i = 0; i < outline.size(); i++){
-            outline.get(i).draw(g);
+        g.setFont(new Font("ComicSans", Font.PLAIN, fontSize));
+
+        if(!start) {
+            //shows instructions in beginning of game
+            g.drawString("SHAPE SHOOTER ARCADE GAME", 160, 75);
+            g.drawString("by Larisa Kreismanis", 200, 100);
+            g.drawString("Objective: Fill in the outlined shape!",145, 150);
+            g.drawString("Instructions:", 145, 185);
+            g.drawString("1.) Click a colored shooter once.", 145, 208);
+            g.drawString("2.) Hold and drag the shooter to aim.", 145, 228);
+            g.drawString("3.) Press the spacebar to shoot.", 145, 248);
+            g.drawString("4.) Match the shape bullet to the outline.", 145, 268);
         }
-        g.drawString("Shapes filled: " + shapesFilled, 160, 45);
-        g.drawString("Timer: " + addSec, 300, 45);
-        
-        if(timeCounter >= 20 && timeCounter <= 40){
-            if(timeCounter % 20 == 0){
-                addSec++;
+        else if(start) {
+            int num = 0;
+            g.setColor(Color.black);
+            for(int i = 0; i < outline.size(); i++) {
+                outline.get(i).draw(g);
             }
-            if(timeCounter == 40){
-                timeCounter = 0;
+
+            g.drawString("Shapes filled: " + shapesFilled, 160, 45);
+
+            g.drawString("Timer: " + addSec, 300, 45);
+            if(timeCounter >= 20 && timeCounter<=40) {
+                //g.drawString((timeCounter*50)/1000+addSec + " ", 400, 20);
+                if(timeCounter%20==0)
+                    addSec++;
+                if(timeCounter==40)
+                    timeCounter=0;
             }
         }
-        
-        if(shapesFilled == 1){
+        if(shapesFilled == 1) { //Number of shapes filled in until game ends
             g.drawString("You Win!", 250, 75);
+            g.drawString("Your time: " + addSec, 238, 95);
             start = false;
             timer.stop();
-            /*
-            try{
-                
-            }
-            catch(Exception e){
-                
-            }
-            */
         }
     }
-}
 
-private class PanelMotionListener extends MouseMotionAdapter {
-    public void mouseDragged(MouseEvent e){
-        if(myMovingShooter != null){
-            int xVal = myMovingShooter.getX();
-            int yVal = myMovingShooter.getY();
-            int width = myMovingShooter.getWidth();
-            int height = myMovingShooter.getHeight();
+    private class PanelMotionListener extends MouseMotionAdapter {
+
+        public void mouseDragged(MouseEvent e) {
+            if(myMovingShooter!=null) {
+                int xVal = myMovingShooter.getX();
+                int width = myMovingShooter.getWidth();
+                int height = myMovingShooter.getHeight();
+                int yVal =  myMovingShooter.getY();
+                if(e.getX()>=xVal-width && e.getX()<=(xVal + width+50) && e.getY()>=yVal && e.getY()<=yVal+height)
+                    myMovingShooter.move(e.getX(), width);
+            }
         }
     }
-}
 
-private void checkStats(){
-    if(myMovingShooter != null){
-        timeCounter++;
-        ArrayList<Bullet> shotBullets = myMovingShooter.getShotBullets();
-        if(shotBullets != null){
-            for(int i = 0; i < shotBullets.size(); i++){
-                boolean move = true;
-                int bulletX = shotBullets.get(i).getX() + shotBullets.get(i).getRadius();
-                int bulletY = shotBullets.get(i).getY();
-                int radius = shotBullets.get(i).getRadius();
-                for(int j = 0; j < outline.size(); j++){
-                    int approxMinX = outline.get(j).getX()-10;
-                    int approxMaxX = outline.get(j).getX()+10;
-                    int approxMinY = outline.get(j).getX()-10;
-                    int approxMaxY = outline.get(j).getX()+10;
-                    if(bulletX < approxMaxX && bulletX > approxMinX){
-                        if(bulletY < approxMaxY && bulletY > approxMinY){
-                            System.out.println(shotBullets.get(i).getId());
-                            System.out.println(outline.get(j).getId());
-                            if(shotBullets.get(i).getId() == outline.get(j).getId()){
-                                if(outline.get(j).getFill() == false){
-                                    bulletX = outline.get(j).getX();
-                                    bulletY = outline.get(j).getY();
-                                    move = false;
-                                    shotBullets.remove(i);
-                                    outline.get(j).setFill(true);
-                                    shapesFilled++;
-                                    break;
+    private void checkStats() {
+        if(myMovingShooter != null) {
+            timeCounter++;
+            ArrayList<Bullet> shotBullets = myMovingShooter.getShotBullets();
+
+            if(shotBullets != null ) {
+                for(int i = 0; i < shotBullets.size(); i++) {
+                    boolean move=true;
+                    int bulletX = shotBullets.get(i).getX() + shotBullets.get(i).getRadius();
+                    int bulletY = shotBullets.get(i).getY();
+                    int radius = shotBullets.get(i).getRadius();
+                    //shotBullets.get(i).move();
+                    for(int j = 0; j < outline.size(); j++) {
+                        int approxMinX = outline.get(j).getX()-10;
+                        int approxMaxX = outline.get(j).getX()+10;
+                        int approxMinY = outline.get(j).getY()-10;
+                        int approxMaxY = outline.get(j).getY()+10;
+                        //if bullet matches outline, stop it
+                        // System.out.println(bulletX + " " + bulletY);
+                        //System.out.println(approxMaxX + " " + approxMinX);
+                        //System.out.println(approxMaxY + " " + approxMinX);
+
+                        if(bulletX < approxMaxX && bulletX > approxMinX) {
+                            if(bulletY < approxMaxY && bulletY > approxMinY) {
+                                System.out.println(shotBullets.get(i).getId());
+                                System.out.println(outline.get(j).getId());
+                                if(shotBullets.get(i).getId() == outline.get(j).getId()) {
+                                    if(outline.get(j).getFill() == false) {
+                                        bulletX = outline.get(j).getX();
+                                        bulletY = outline.get(j).getY();
+                                        move=false;
+                                        shotBullets.remove(i);
+                                        outline.get(j).setFill(true);
+                                        shapesFilled++;
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
+                    if(move == true)
+                        shotBullets.get(i).move();
                 }
             }
         }
     }
-    if(move == true){
-        shotBullets.get(i).move();
-    }
-}
-    
-    
-    //return null;
-} //end class
+}  //end class
