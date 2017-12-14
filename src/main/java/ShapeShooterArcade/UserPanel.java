@@ -60,7 +60,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Mo
         shooters.add(new TriangleShooter(50, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.RED), 1));  //UP Triangle
         shooters.add(new TriangleShooter(150, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.BLUE), 2));  //DOWN Triangle
         shooters.add(new TriangleShooter(250, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.GREEN), 3));  //RIGHT Triangle
-        shooters.add(new TriangleShooter(350, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.ORANGE), 4));  //LEFT Triangle       
+        shooters.add(new TriangleShooter(350, height*4/5, triangleShooterHeight, triangleShooterWidth, (Color.ORANGE), 4));  //LEFT Triangle
         shooters.add(new SquareShooter(450, height*4/5, squareShooterHeight, squareShooterWidth, (Color.MAGENTA), 5));  //Square
 
         //Status check every 50 milliseconds
@@ -100,7 +100,8 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Mo
                 '\n'+"1.) Click a colored shooter once." +
                 '\n'+"2.) Hold and drag the shooter to aim." +
                 '\n'+"3.) Press the spacebar to shoot." +
-                '\n'+"4.) Match the shape bullet to the outline.";
+                '\n'+"4.) Match the shape bullet to the outline." +
+                '\n'+"Press Enter to Start";
     }
     public String getCredits() {
         return "Developed by Larisa Kreismanis & Nathan Bullock";
@@ -181,13 +182,14 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Mo
         if(!start) {
             //shows instructions in beginning of game
             g.drawString("SHAPE SHOOTER ARCADE GAME", 160, 75);
-            g.drawString("by Larisa Kreismanis", 200, 100);
+            g.drawString("by Larisa Kreismanis & Nathan Bullock", 140, 100);
             g.drawString("Objective: Fill in the outlined shape!",145, 150);
             g.drawString("Instructions:", 145, 185);
             g.drawString("1.) Click a colored shooter once.", 145, 208);
             g.drawString("2.) Hold and drag the shooter to aim.", 145, 228);
             g.drawString("3.) Press the spacebar to shoot.", 145, 248);
             g.drawString("4.) Match the shape bullet to the outline.", 145, 268);
+            g.drawString("Press Enter to Start", 145, 290);
         }
         else if(start) {
             int num = 0;
@@ -207,7 +209,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Mo
                     timeCounter=0;
             }
         }
-        if(shapesFilled == 1) { //Number of shapes filled in until game ends
+        if(shapesFilled == 13) { //Number of shapes filled in until game ends
             g.drawString("You Win!", 250, 75);
             g.drawString("Your time: " + addSec, 238, 95);
             start = false;
